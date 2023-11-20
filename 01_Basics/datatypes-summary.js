@@ -55,3 +55,28 @@ console.log(typeof outsideTemp);
 //        Arrays  =>  object
 //        Function  =>  function
 //        Object  =>  object
+
+
+//++++++++++++++++++++++++++++++++++++++++
+
+// stack(Primitive),heap(Non-Primitive)
+// stack uses pass by value maintains copy of value
+//heap uses pass by reference maintains or refer to the original value
+
+let emailone = "abhi@gmail.com"
+let emailtwo = emailone
+
+emailtwo = "bmabhi@gmail.com"
+console.log(emailone);
+console.log(emailtwo);
+
+let userone = {
+    email : "user1@gmail.com",
+    upi : "user1@ybl"
+}
+
+let usertwo = userone
+
+userone.email = "abhi@gmail.com"
+console.log(userone.email);
+console.log(usertwo.email);
