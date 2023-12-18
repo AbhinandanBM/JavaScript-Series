@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Api Request</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .card {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        width: 300px;
+      }
+
+      .card-header {
+        background-color: #3498db;
+        color: #fff;
+        padding: 15px;
+        text-align: center;
+      }
+
+      .card-body {
+        padding: 25px;
+      }
+
+      .card-footer {
+        background-color: #f2f2f2;
+        color: #212121;
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body style="background-color: #212121; color: white">
+    <!-- 0 	UNSENT 	Client has been created. open() not called yet.
+1 	OPENED 	open() has been called.
+2 	HEADERS_RECEIVED 	send() has been called, and headers and status are available.
+3 	LOADING 	Downloading; responseText holds partial data.
+4 	DONE 	The operation is complete. -->
+
+    <div class="card">
+      <div class="card-header">
+        <h2 id="name"></h2>
+        <span>Github Id: </span>
+        <span id="githubId"></span>
+      </div>
+      <div class="card-body" id="image"></div>
+      <div class="card-footer" id="follow">
+        <p>Following</p>
+      </div>
+    </div>
+  </body>
+  <script>
+    let name, githubId, url, follow;
+    // you can change this url to check your Profile details
+    const requestURL = "https://api.github.com/users/AbhinandanBM";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", requestURL);
+    xhr.onreadystatechange = function () {
+      console.log(xhr.readyState);
+      if (xhr.readyState === 4) {
+        // const data = this.responseText;
+        // console.log(data);
+        // console.log(typeof data); // data came from api will be string most of cases
+        const data = JSON.parse(this.responseText);
+        console.log(typeof data);
+        console.log(data);
+        name = data.name;
+        document.getElementById("name").innerHTML = name;
+        githubId = data.login;
+        document.getElementById("githubId").innerHTML = githubId;
+        url = data.avatar_url;
+        document.querySelector(
+          "#image"
+        ).innerHTML = `<img src="${url}" alt="" width="250" height="260">
+>`;
+        follow = data.following;
+        const h2 = document.createElement("h2");
+        h2.appendChild(document.createTextNode(follow));
+        document.querySelector("#follow").appendChild(h2);
+      }
+    };
+    xhr.send();
+  </script>
+</html>
