@@ -1,3 +1,15 @@
+/*
+In JavaScript, a Promise is an object that represents the eventual completion or failure of an asynchronous operation and its resulting value. It is a way to handle asynchronous operations more cleanly and avoid the "callback hell" or "pyramid of doom" that can occur with nested callbacks.
+
+A Promise can be in one of three states:
+
+    1.Pending: The initial state; the promise is neither fulfilled nor rejected.
+
+    2.Fulfilled: The operation completed successfully, and the promise has a resulting value.
+
+    3.Rejected: The operation failed, and the promise has a reason for the failure.
+ */
+
 const { log } = require("console");
 
 const promiseOne = new Promise(function (resolve, reject) {
@@ -32,7 +44,6 @@ promiseThree.then(function (user) {
   console.log(user);
 });
 
-
 const promiseFour = new Promise(function (resolve, reject) {
   setTimeout(function () {
     let error = false;
@@ -57,32 +68,30 @@ promiseFour
   })
   .finally(() => console.log("Promise is either resolved or rejected"));
 
-
-
-const promiseFive = new Promise(function(resolve,reject){
-    setTimeout(function(){
-        let error = true;
+const promiseFive = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    let error = true;
     if (!error) {
       resolve({ username: "Javascript", password: "123" });
     } else {
       reject("ERROR: JS went wrong");
     }
-    },1000)
-})
+  }, 1000);
+});
 
 // import fetch from "node-fetch";
-const fetch = require('node-fetch')
+const fetch = require("node-fetch");
 
-async function consumePromisefive(){
-    try {
-        const response = await promiseFive
-        console.log(response);
-    } catch (error) {
-        console.log(error);
-    }
+async function consumePromisefive() {
+  try {
+    const response = await promiseFive;
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-consumePromisefive()
+consumePromisefive();
 
 // async function getallUsers(){
 //     try {
@@ -99,11 +108,11 @@ consumePromisefive()
 
 // getallUsers()
 
-fetch('https://jsonplaceholder.typicode.com/users')
-.then((resolve) => {
-  return resolve.json()
-})
-.then((data) => {
-  console.log(data);
-})
-.catch((error) => console.log(error))
+fetch("https://jsonplaceholder.typicode.com/users")
+  .then((resolve) => {
+    return resolve.json();
+  })
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => console.log(error));
