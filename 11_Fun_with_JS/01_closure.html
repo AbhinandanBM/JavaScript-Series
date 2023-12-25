@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closure</title>
+  </head>
+  <body style="background-color: #212121;">
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+  </body>
+  <script>
+    /********************** Lexical Scoping **********************/
+
+    // function init(){
+    //     let name = "mozilla"
+    //     function displayName(){
+    //         console.log(name);
+    //     }
+    //     displayName();
+    // }
+    // init();
+
+    // function outer(){
+    //     let name = 'abhi'
+    //     console.log("outer", secret);
+    //     function inner(){
+    //         let secret = 'my123'
+    //         console.log("inner", name);
+    //     }
+    //     function innertwo(){
+    //         console.log("innertwo", name);
+    //         console.log(secret);
+    //     }
+    //     inner()
+    //     innertwo()
+    // }
+    // outer()
+    // console.log("To Outer", name);
+
+    /*************************** Closure ***************************/
+
+    function makefun(){
+        const name = "mozilla"
+        function displayName(){
+            console.log(name);
+        }
+        return displayName
+    }
+
+    const func = makefun()
+    func()
+  </script>
+  <script>
+    // document.getElementById('orange').onclick = function(){
+    //     document.body.style.backgroundColor = "orange"
+    // }
+    // document.getElementById('green').onclick = function(){
+    //     document.body.style.backgroundColor = "green"
+    // }
+
+    function clickable(color){
+        // document.body.style.backgroundColor = `${color}`
+        
+        return function(){
+            document.body.style.backgroundColor = `${color}`
+        }
+    }
+
+    document.getElementById('orange').onclick = clickable('orange')
+    document.getElementById('green').onclick = clickable('green')
+  </script>
+</html>
